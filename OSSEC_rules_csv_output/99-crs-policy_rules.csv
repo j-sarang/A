@@ -1,0 +1,3 @@
+GROUPNAME,,Rule ID,Level,SID,PCRE2,DESCRIPTION,GROUP,
+policy_violation,,17101,9,authentication_success,8 pm - 7:00 am, Successful login during non-business hours., login_time, no_ar]
+,,17102,9,authentication_success, <weekday>weekends</weekday>, Successful login during weekend., login_day, no_ar]

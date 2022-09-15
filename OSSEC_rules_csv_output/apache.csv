@@ -1,0 +1,8 @@
+groupname
+local,systemd,
+none found
+rule
+40700 , 0 , [<program_name_pcre2>^systemd$|^systemctl$</program_name_pcre2>, <description>Systemd rules</description>]
+40701 , 0 , [<if_sid>40700</if_sid>, <pcre2> Stale file handle$</pcre2>, <description>Stale file handle.</description>]
+40702 , 2 , [<if_sid>40700</if_sid>, <pcre2>Failed to get unit file state for</pcre2>, <description>Failed to get unit state for service. This means that the .service file is missing</description>]
+40703 , 5 , [<if_sid>40700</if_sid>, <pcre2>entered failed state</pcre2>, <description>Service has entered a failed state, and likely has not started.</description>]
