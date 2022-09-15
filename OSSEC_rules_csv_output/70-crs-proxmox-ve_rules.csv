@@ -1,0 +1,5 @@
+GROUPNAME,,Rule ID,Level,SID,PCRE2,DESCRIPTION,GROUP
+syslog,proxmox-ve,53400,0,pvedaemon, pvedaemon messages grouped.],,
+,,53401,6,53400, authentication failure; , Proxmox VE authentication failed., authentication_failed
+,,53402,10,53401, , Proxmox VE brute force (multiple failed logins)., authentication_failures
+,,53403,3,53400,  successful auth for user , Proxmox VE authentication succeeded., authentication_success

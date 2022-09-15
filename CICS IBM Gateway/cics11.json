@@ -1,0 +1,40 @@
+
+Web service connection closes as soon as HTTP request is sent
+When an application attempts to send a web service request
+to the Gateway daemon, the connection to the Gateway daemon is dropped
+if an incorrect port is used.
+SymptomThe HTTP or HTTPS connection between
+the web service client application and the Gateway daemon is closed
+as soon as a web service request is sent. If connection logging is
+enabled, the following message is written to the Gateway daemon error
+log:CTG6507I Client disconnected: <connection details>, 
+	reason = CTG6656E Incorrect data <data> received on the network connection 
+	between the Gateway daemon and client application
+
+
+Probable causeThe web service
+client application attempted to send a web service request to the
+Gateway daemon TCP, SSL or statistics API port, instead of the HTTP
+or HTTPS port.
+
+ActionCorrect the web service client application
+to send web service requests to the Gateway daemon HTTP or HTTPS port.
+
+
+
+
+Parent topic: JSON web services problems
+
+
+
+
+ Information
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/conn_closes.html
+
+
+

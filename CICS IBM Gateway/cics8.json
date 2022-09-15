@@ -1,0 +1,132 @@
+['https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/aipdszq.html']
+['https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/dirtyaddress.html']
+['https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/C0300012.html']
+['https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/diagnosing.html']
+['javascript:ibm_id_form()']
+
+Authorization failure using servlets with WebSphere
+A user ID and password authorization failure can occur
+for servlets that use the IBM® WebSphere® autostart
+function. This is indicated by a message in the JNI trace.
+SymptomThe following message appears in
+the JNI trace:
+ CcicsECI: Authorize userid/password
+with RACF. Return code = -1, errno = 157
+
+Probable causeServlets that use the WebSphere autostart
+function do not have the required authority to access CICS® Transaction Gateway.
+
+ActionUse "user-driven" servlets.
+With these the initialization is performed in the servlet's init() method.
+
+
+
+
+Parent topic: IBM WebSphere Application Server problems
+
+
+
+
+ Information
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/aipdszq.html
+
+
+
+
+Gateway daemon startup fails due to dirty address space 
+The Gateway daemon fails to start because the
+address space where it runs has previously been used for running non
+program-controlled code.
+SymptomThe Gateway daemon fails
+to start with the following error:
+CTG9549E Gateway
+daemon failed to start, see Gateway error log; the log location  is
+defined by configuration file file name
+
+Probable causeThe CICS® Transaction Gateway HFS (Hierarchical
+File Store) is mounted with NOSETUID.
+
+ActionEnsure that HFS is mounted with the
+default of SETUID.
+
+
+
+
+Parent topic: IBM WebSphere Application Server problems
+
+
+
+
+ Information
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/dirtyaddress.html
+
+
+
+
+Loss of connection with unit of recovery in doubt
+A network connection between IBM® WebSphere® Application
+Server and the Gateway daemon is terminated while a UOR is in doubt.
+This results in an ATR229D write to operator with reply (WTOR) message.
+SymptomA WTOR message similar to the following
+is written to the system log: 
+0000 *NN ATR229D
+CANCEL DELAYED. REPLY WAIT, BACKOUT, OR COMMIT TO RESOLVE INDOUBT
+UR. URID = UR identifier. 
+Where NN is
+a number for the operator to reply to and UR identifier is
+a URID.
+
+Probable causeA network connection between IBM WebSphere Application
+Server and the Gateway daemon is terminated, when a UOR is in doubt.
+
+ActionNo further action is required because IBM WebSphere Application
+Server reconnects automatically and resolves the transaction.
+When IBM WebSphere Application
+Server reconnects to the Gateway daemon, or to any other Gateway daemon
+in the group, and issues a commit or backout request, the transaction
+is resolved, the WTOR is cancelled, and the following message is written
+to the log: 
+10:45:09.23  00000010  IEE400I THESE
+MESSAGES CANCELLED - NN
+The
+connection manager thread that was dealing with the network connection
+that failed stays blocked until the UOR is resolved and the message
+cancelled.
+Note: If you do reply to the message
+with BACKOUT or COMMIT before IBM WebSphere Application
+Server has reconnected and resolved the transaction, a heuristic hazard
+error is returned to IBM WebSphere Application
+Server. In this case it is your responsibility to ensure that transaction
+integrity is maintained.  You should not respond to this message but
+instead, allow IBM WebSphere Application
+Server to resolve the transaction.
+
+
+
+
+
+Parent topic: IBM WebSphere Application Server problems
+
+
+
+
+ Reference
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/C0300012.html
+
+
+

@@ -1,0 +1,13 @@
+GROUPNAME,,Rule ID,Level,SID,PCRE2,DESCRIPTION,GROUP,,
+syslog,dhcpd,53000,0,dhcpd, dhcpd grouping.],,,,
+none found,,53001,1,53000, ^DHCPREQUEST|^DHCPOFFER |^DHCPDISCOVER|^DHCPACK, Normal dhcp.],,,
+rule,,53003,5,53000, answers a ping after sending a release|Possible release spoof, A host issued a release but is responding to pings.],,,
+,,53004,1,53000, expecting left brace\.$|, fixed-address parameter not allowed here\.$|, parameters not allowed after first declaration\.$|, Configuration file errors encountered, Configuration errors.]
+,,53005,3,53000, exiting\.$, dhcpd is exiting.],,,
+,,53006,1,53000, Can't listen on , dhcpd cannot listen to an interface.],,,
+,,53007,1,53006, has no subnet declaration for, dhcpd is not configured to listen to an interface.],,,
+,,53008,1,53000, Listening on , dhcpd has been started.],,,
+,,53009,0,53000, ^Address range , Message with address range.],,,
+,,53010,2,53009,  not on net , Defined address range is not on the configured network.],,,
+,,53011,7,53000, ^no free leases, DHCP server has run out of leases.],,,
+,,53013,2,53000, ^already acking lease , Multiple acks.],,,

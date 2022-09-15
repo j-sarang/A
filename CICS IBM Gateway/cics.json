@@ -1,0 +1,401 @@
+"https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/aipdimm.html
+"https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/C0300004.html
+"https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/C0300005.html
+"https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/ctgarm_problems.html
+"https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/cclaipd.ide6.html
+"https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/ccl11qui.html
+"https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/abend_ec6.html
+"https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/ctg0827w.html
+"https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/diagnosing.html
+javascript:ibm_id_form()
+
+Gateway daemon not able to access load library
+When starting the Gateway, a CEE3250C ABEND S806 message
+is issued if the Gateway daemon cannot access the CICS EXCI load library.
+SymptomThe following message is generated
+when starting the Gateway:  
+CEE3250C The system
+or user abend S806  R=00000004 was issued. From entry point MVS_CcicsInit
+at compile unit offset -FFFF8D84 at address 1AEB158C.
+
+Probable causeThe Gateway daemon cannot
+access the CICS® EXCI load library.
+
+Action
+
+Check the STEPLIB environment variable setting and modify it if
+necessary. For more information, see Environment variables: local and remote mode for more information. Also
+check that the user ID is authorized to access the CICS EXCI load
+library.
+
+
+
+Parent topic: Startup and shutdown problems
+
+
+
+
+ Information
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/aipdimm.html
+
+
+
+
+CTGRRMS services fails to initialize
+CICS® Transaction Gateway might
+fail to start the CTGRRMS services if the CTGRRMS version is incompatible.
+SymptomMessage CTG8659E with return code
+1792 is issued.
+If
+CICS Transaction Gateway V7.2 or V8.0 is used with a V6.1, V7.0, or
+V7.1 CTGRRMS, the following message is also written to the system
+log: IEF170I 1 CTGRRMS  IEA995I SYMPTOM DUMP OUTPUT 269 
+SYSTEM COMPLETION CODE=0C4  REASON CODE=00000011  
+... 
+ACTIVE LOAD MODULE       ADDRESS=1AD00048 OFFSET=0000117C    
+ NAME=CTGINIT 
+
+
+Probable causeThe return code 1792 might indicate
+that SCTGLINK installed with a version V6.1, V7.1 or V7.2 of CICS Transaction Gateway is
+specified on the LNKLST and CICS Transaction Gateway Version
+7.2 or 8.0 is used.
+ActionConfigure the LNKLST to refer to the
+SCTGLINK  data set that is installed with the release of the Gateway
+daemon you are using. See Starting CTGRRMS services for more information.
+When multiple releases of the CICS Transaction Gateway are
+installed on the same IBM® z/OS® image,
+the LNKLST must refer to the SCTGLINK that is installed with the latest
+release of the CICS Transaction Gateway.
+
+
+
+Parent topic: Startup and shutdown problems
+
+
+
+
+ Reference
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/C0300004.html
+
+
+
+
+Address space fails to initialize
+If CTGRRMS is not running on the IBM® z/OS® image
+and ctgasi is used to call it, CTGRRMS might fail to start.
+SymptomThe following messages are issued:
+CTG6201I
+ctgasi - CTGRRMS Services Address Space Initiator. 
+CTG6200I
+ctgasi - CTG6200I (C) Copyright IBM Corporation 2005.  All rights
+reserved. 
+CTG6237I ctgasi - starting
+up services address space. 
+CTG6216E
+ctgasi - ASCRE failed for CTGINIT, Post value = FFFFFFFF. 
+CTG6255E
+ctgasi - timed out waiting for address space to initialize. 
+CTG6240E
+ctgasi - the version of CTGINIT may be incompatible with ctgasi.
+
+Probable causeCTGRRMS service is not starting because CTGINIT on the LNKLST
+is at the wrong version. CTGRRMS is trying to reuse an LX value
+that is corrupt.  You can further diagnose this by checking the MVS™ System Log for an 052 abend from
+the CTGRRMS process.  If this dump is taking place, probably with
+a reason code of 0512, (in R15 for the dump), the reserved LX value
+might be corrupt.
+The timeout and post value of FFFFFF might indicate that the version
+of SCTGLINK referred to in the LNKLST is for a CICS® Transaction Gateway V6.1, V7.0 or V7.1
+and a ctgasi is for a V7.2 or later of the CICS Transaction Gateway. CTGRRMS is trying
+to reuse an LX value previously used for the CTGRRMS
+services and the LX value is in use by another
+process.  This might be due to a previous CTGRRMS process not terminating
+completely, or completing but not releasing the LX value.
+
+
+There
+are two reasons why the message CTG6255E might be returned:CTGRRMS service is not starting because CTGINIT on the LNKLST
+is at the wrong version.
+CTGRRMS is trying to reuse an LX value that is corrupt. You can
+further diagnose this by checking the MVS System
+Log for an 052 abend from the CTGRRMS process. If this dump is taking
+place, probably with a reason code of 0512, (in R15 for the dump),
+the reserved LX value might be corrupt. 
+
+
+
+ActionChange the LNKLST to refer to a SCTGLINK PDS from the same version
+of the Gateway as the ctgasi tool. When multiple releases of CICS Transaction Gateway are installed
+on the same LPAR, SCTGLINK and ctgasi from the latest installed version
+must be used.
+First check there is no CTGRRMS process running. If there is,
+force the process to end and retry. If the problem persists you can
+renew the LX value by starting CTGRRMS again using
+the force option: ctgasi -f. This removes the
+old LX value and a new value is chosen. Because a limited number of
+LX values available on a IBM z/OS image,
+do not use this option unless there is no alternative.  When all the
+LX values have been used you must IPL the IBM z/OS image
+before new services, including CTGRRMS services, can be started.
+
+
+
+
+
+
+Parent topic: Startup and shutdown problems
+
+
+
+
+ Reference
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/C0300005.html
+
+
+
+
+CICS Transaction Gateway fails
+to initialize after an ARM restart
+If CICS® Transaction
+Gateway stops and if ARM (IBM® z/OS® Automatic
+Restart Manager) is configured for cross-system restarts, it attempts
+to restart CICS Transaction
+Gateway on a different IBM z/OS image
+within in the same sysplex.
+SymptomCICS Transaction
+Gateway fails to initialize following an Automatic Restart Manager
+(ARM) restart.
+
+Probable causeIf IBM z/OS fails,
+a whole group of related subsystems and applications also fail. ARM
+can restart all the failed systems automatically, in a predefined
+order, on a different IBM z/OS image
+within the sysplex. This is called a cross-system restart.
+In
+this situation, IBM z/OS has
+failed and ARM has performed a cross-system restart of CICS Transaction Gateway on a different IBM z/OS image
+in the same sysplex.
+
+ActionModify the ARM profile for the ARM_ID
+to prevent cross-system restarts.
+For more
+information, see: IBM z/OS V1R4.0 MVS™ Setting Up a Sysplex (SA22-7625-05).
+
+
+
+
+Parent topic: Startup and shutdown problems
+
+
+
+
+ Information
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/ctgarm_problems.html
+
+
+
+
+CTGRRMS fails to start when XA support is active
+If XA support has been activated, the Gateway daemon and
+CTGRRMS might not start.
+SymptomThe CICS® Transaction Gateway fails
+to start, and a log message indicates that CTGRRMS services could
+not be started.
+
+Probable causeThe CTGINIT module is missing
+from the LNKLST.
+
+ActionCheck that the CTGINIT
+module is in the LNKLST. Dump symptoms, similar to the following,
+indicate that the CTGINIT module cannot be found: CSV003I REQUESTED MODULE CTGINIT  NOT FOUND                            
+CSV028I ABEND806-04  JOBNAME=MSTJCL00  STEPNAME=LLA                    
+IEA989I SLIP TRAP ID=X806 MATCHED.  JOBNAME=CTGRRMS , ASID=018B.       
+IEE824I CTGRRMS  FAILED, TERMINATED                                    
+IEA995I SYMPTOM DUMP OUTPUT 495                                        
+SYSTEM COMPLETION CODE=806  REASON CODE=00000004                       
+ TIME=12.33.27  SEQ=62869  CPU=0000  ASID=018B                         
+ PSW AT TIME OF ERROR  070C1000   8142E1EE  ILC 2  INTC 0D             
+   NO ACTIVE MODULE FOUND                                              
+   NAME=UNKNOWN                                                        
+   DATA AT PSW  0142E1E8 - 9024181E  0A0D18FB  180C181D                
+   GR 0: 00001E00   1: 84806000                                        
+      2: 00FCB218   3: 00000000                                        
+      4: 00000000   5: 008FD5C0                                        
+      6: 000000FF   7: 00000000                                        
+      8: 008FA250   9: 0142E6B4                                        
+      A: 00000000   B: 00000004                                        
+      C: 00000000   D: 008FA250                                        
+      E: 84806000   F: 00000004                                        
+ END OF SYMPTOM DUMP 
+Follow the steps in Enabling CTGRRMS services to add the module
+to the LNKLST.
+If a network failure occurs, the transaction
+is rolled back if the Java™ Transaction
+API (JTA) specification allows this. If the state of the transaction
+does not allow the transaction to be rolled back, the transaction
+manager repeatedly attempts to open new connections and reissue requests.
+The transaction manager rolls back the transaction or completes the
+transaction, depending on the state when the error occurs. In this
+situation, the transaction manager is responsible for rolling back
+or completing the transaction.
+
+
+
+
+Parent topic: Startup and shutdown problems
+
+
+
+
+ Information
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/cclaipd.html
+
+
+
+
+Gateway daemon fails to shut down 
+During the initiation phase of a normal shutdown, some
+calls and requests prevent the shutdown from completing.
+SymptomThe
+Gateway daemon fails to shut down normally (quiesce) or fails to shut
+down in the expected time.
+
+Probable causeOutstanding logical units
+of work from ECI or EPI requests that are waiting to complete, prevent
+the Gateway daemon from quiescing.
+
+ActionWait for the API calls to complete.
+ The following API calls do not block a normal shutdown of CICS® Transaction Gateway: ECI_GET_REPLY_WAIT
+ECI_GET_SPECIFIC_REPLY_WAIT
+EPI_GET_EVENT and waitState is EPI_WAIT (an EPIRequest.getEvent
+call that has its second parameter set to EPI_WAIT causes the request
+object to wait for events)
+
+
+If there are any active applications or tasks in "wait" state
+in CICS, you must investigate
+these. For example, to query a CICS task
+that is in "wait" state, use the CEMT INQ TASK command.
+For more information about tasks that are in "wait" state see the CICS Transaction
+Server Library.
+If
+normal shutdown fails you can promote this to an immediate shutdown.
+For more information about normal shutdown  see Stopping the CICS Transaction Gateway.
+
+
+
+
+Parent topic: Startup and shutdown problems
+
+
+
+
+ Information
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/ccl11qui.html
+
+
+
+
+ABEND EC6-xxxxE04B on startup
+CICS® Transaction
+gateway fails to start.
+SymptomThe CICS Transaction
+Gateway fails to start with an ABEND EC6-xxxxE04B and
+message BPXP029I being output.
+
+Probable causeCICS Transaction Gateway is running in a program
+controlled environment and loaded a file that is not owned by UID
+0.
+
+ActionLocate the file identified in message BPXP029I and
+ensure it and all other files that are loaded by the CICS TG are owned by UID 0.
+
+
+
+
+Parent topic: Startup and shutdown problems
+
+
+
+
+ Information
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/abend_ec6.html
+
+
+
+
+Message CTG0827W on startup
+Message CTG0827W CTGBATCH Child completed with a
+nonzero return code xxx on startup
+SymptomCICS® Transaction
+Gateway fails to initialize.
+
+Probable causeThe attempt to start the
+Gateway daemon failed.
+
+ActionSpecify the CTGDBG DD statement
+in the CTGBATCH job so that extra debug information
+is written to STDERR and STDOUT.
+Check
+that the REGION parameter specified on the job
+is sufficient. See message CTG0813I CTGBATCH RLIMIT_AS reports
+current=xxxxM, system max=xxxxM.
+Check that no related
+security errors are reported in the CICS TG
+job log and IBM® z/OS® system
+log.
+
+
+
+
+Parent topic: Startup and shutdown problems
+
+
+
+
+ Information
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/ctg0827w.html
+
+
+

@@ -1,0 +1,10 @@
+GROUPNAME,,Rule ID,Level,SID,PCRE2,DESCRIPTION,GROUP
+syslog,psad,53700,0, [psad, <decoded_as>psad, PSAD group],
+,,53701,0,53700, scan detected, PSAD group scan detected],
+,,53702,0,53700, added iptables, PSAD group added iptables],
+,,53711,10,53701, DL: 4|DL: 5, PSAD portscan],
+,,53712,10,53702, auto-block against, PSAD auto-block],
+,,53713,3,53701, DL: 3, PSAD level 3 warning],
+,,53714,10,53713, , many PSAD level 3 warnings from same source],
+,,53715,10,53713, , many PSAD level 3 warnings from same source (slow scan)],
+,,53716,6,53700, signature match: , PSAD signature match],

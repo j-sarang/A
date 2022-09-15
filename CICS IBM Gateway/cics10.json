@@ -1,0 +1,97 @@
+['https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/json_jcl_error.html']
+['https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/json_errno.html']
+['https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/diagnosing.html']
+['javascript:ibm_id_form()']
+
+JSON web services assistant fails with JCL error
+The JSON web services assistant JCL fails if characters // are
+present in column 1 of the STDPARM DD statement.
+SymptomThe JSON web services assistant
+JCL job output log JESYSMSG contains messages
+of the format:  STMT NO. MESSAGE 
+       n IEFC662I INVALID LABEL 
+       n IEFC605I UNIDENTIFIED OPERATION FIELD 
+
+
+Probable causeThe // characters
+that are used to identify an MVS PDS member or sequential data set
+value are present in column 1 within the STDPARM parameter
+list. 
+
+ActionEnsure that statement number n in
+the JCL specifies an MVS PDS member or sequential data set, and that
+the // characters are not present in column 1. For
+example, if you continue the LS-RESPONSE parameter
+across multiple lines use: LS-RESPONSE=\
+ //'USERID.PROJECT.COBOL(RESPONSE)'
+
+
+
+
+
+Parent topic: JSON web services assistant problems
+
+
+
+
+ Information
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/json_jcl_error.html
+
+
+
+
+JSON web services assistant fails with errno and errno2 values. 
+JSON web services assistant fails and displays an error
+message that includes errno and errno2 values.
+SymptomFor example: the CTGJS2LS assistant
+might fail with: CTG8720E Error using temporary workspace: //'user.CICS.SOURCE(PROGRAMREQ)': 
+fopen() failed; EDC5047I An invalid file name was specified as a function parameter.; 
+errno=47 errno2=0xc00b028e last_op=602 errorCode=0x0
+
+
+Probable causeError reading from or writing
+to an MVS™ PDS member or sequential
+data set specified in the JSON web services assistant parameters.
+
+ActionThe string message for errno is
+included in the message text. For example: An invalid file
+name was specified as a function parameter.
+For more
+information on the cause of the error, find the errno2 value
+in the Language Environment® utility, edcmtext.
+For more
+information about edcmtext, see Using edcmtext to obtain information about errno2
+values in the IBM® z/OS® Language Environment Debugging
+Guide.
+For example: edcmtext 0xc00b028e
+ The
+file name argument passed to fopen() or freopen() was
+not valid. This failure is specific to the first pass name parsing
+when it is known that the file name cannot be a UNIX file. In this example, the JSON web services
+assistant is unable to write the generated language structure to the MVS PDS member specified on the LS-REQUEST parameter,
+because the member name specified exceeds the eight character limit
+for MVS PDS member names.
+
+
+
+
+Parent topic: JSON web services assistant problems
+
+
+
+
+ Information
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/json_errno.html
+
+
+

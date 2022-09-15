@@ -1,0 +1,9 @@
+GROUPNAME,,Rule ID,Level,SID,PCRE2,DESCRIPTION,GROUP
+zeus,,31200,0,zeus, Grouping of Zeus rules.],,
+,,31201,0,31200, ^\[\S+ \S+\] INFO:|^\[\S+ \S+\] SSL:, Grouping of Zeus informational logs.],
+,,31202,4,31200, ^\[\S+ \S+\] WARN:, Zeus warning log.],
+,,31203,9,31200, ^\[\S+ \S+\] SERIOUS:, Zeus serious log.],
+,,31204,12,31200, ^\[\S+ \S+\] FATAL:, Zeus fatal log.],
+,,31205,8,31202, admin:Authentication failure, Admin authentication failed., authentication_failed
+,,31206,0,31202, Unknown directive, Configuration warning (ignored).],
+,,31251,10,31202, Multiple Zeus warnings.],,

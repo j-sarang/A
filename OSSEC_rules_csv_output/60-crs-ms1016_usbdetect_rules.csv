@@ -1,0 +1,2 @@
+GROUPNAME,,Rule ID,Level,SID,PCRE2,DESCRIPTION,GROUP
+windows,usb,53626,8,18104, ^6416$, A new external device was recognized by the System, windows

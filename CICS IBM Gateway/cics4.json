@@ -1,0 +1,219 @@
+['https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/ahpdwde.html']
+['https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/dfhex0003.html']
+['https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/oometc.html']
+['https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/diagnosing.html']
+['javascript:ibm_id_form()']
+
+Memory use increases over time
+The amount of memory used by the Gateway daemon might
+increase over time and a java.lang.OutOfMemory exception might occur.
+The maximum number of connection manager threads and worker threads
+is defined in the CICS® Transaction Gateway configuration.
+SymptomThe Gateway daemon stops responding and the JVM writes
+a java.lang.OutOfMemory exception to the stderror log file or to the Java™ dump file. The JVM also creates
+various dump files in the information log. There is probably no noticeable
+decrease in performance before the problem occurs.  If you happened
+to be monitoring memory usage before the dump occurred, you would
+have seen that memory usage gradually increased over time until eventually
+the limit was reached.
+
+Probable causeThere is a problem with a user-written application, for example
+a request exit which has remained inadvertently connected and is using Java resources.
+There are too many active Java threads
+(connection manager threads and worker threads).
+The Java heap size is unnecessarily
+large. Because the memory required to create Java heap and Java threads
+is allocated from the same finite storage area, it is possible that
+making the Java heap too large
+could indirectly cause a java.lang.OutOfMemory exception because there
+would then be insufficient memory available to create enough Java threads.
+The Java heap size is too
+small.
+The CICS REGION
+size is too small.
+
+
+
+ActionIf there is a problem with a user application, ensure
+that the application practices good memory management techniques,
+such as freeing resources when they are no longer required. 
+If the Java heap size is
+unnecessarily large or too small, set the maximum amount of heap memory
+available to the JVM by using the -Xmx option. The default heap size
+specified by the CICS Transaction Gateway is
+128MB.
+Run a memory usage monitor against the Gateway daemon process. 
+
+
+
+Additional informationThe way that Java allocates memory depends on
+your JVM implementation. Most JVMs allow you to adjust the maximum
+amount of heap memory and adjust the amount of memory allocated to
+each thread.
+The amount of memory that Java allocates to each thread is set by using
+the -Xmso and -Xss options. Do not change the Java stack and native stack sizes from their
+default values.
+For more information on thread limits see Threading model. For more information
+on Java memory allocation and
+JVM stack sizes, see the IBM® Java Diagnostics Guides Information
+Center.
+Also see Tuning the Gateway to avoid out-of-memory conditions.
+
+
+
+
+Parent topic: Memory problems
+
+Related reference:
+List of statistics
+
+Related information:
+Displaying statistics
+Gateway daemon resources
+
+
+
+
+ Information
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/ahpdwde.html
+
+
+
+
+Message DFHEX0003 following startup
+After CICS® Transaction Gateway initialization
+completes, message DFHEX0003 is displayed with System
+completion code=878 Reason code=00000010 and CICS TG stops.
+SymptomA 64-bit CICS TG is configured with a region size of
+300M. The following messages may be written to the log:IEF403I CTG900 - STARTED                                                                
+BPXM023I (CTGPERF) CTG6400I CTG900   CICS TRANSACTION GATEWAY IS STARTING               
+BPXM023I (CTGPERF) CTG6512I CTG900   CICS TRANSACTION GATEWAY INITIALIZATION COMPLETE   
++DFHEX0003  A GETMAIN request in module DFHXCPRH (code X'0617') has failed. Reason X'04'.
+.
+.
+IEA705I ERROR DURING GETMAIN SYS CODE = 878-10 CTG900 CTG900 00     
+.
+.
+   693             SYSTEM COMPLETION CODE=878  REASON CODE=00000010                    
+
+
+Probable causeThe REGION size is too small.
+The 878-10 abend indicates an out-of-memory condition.
+The DFHEX0003 message "A GETMAIN request
+... has failed" also indicates a memory problem.
+
+ActionIncrease the REGION size. For more
+information on performance and tuning, see Tuning the Gateway to avoid out-of-memory conditions and Memory setting on IBM z/OS
+
+
+
+
+Parent topic: Memory problems
+
+
+
+
+ Information
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/dfhex0003.html
+
+
+
+
+OutOfMemory(OOM) error due to lack of native memory for thread creation
+The total amount of native memory used by the Gateway daemon increases per thread. 
+In 64 bit java every thread running in AMODE64 requires at least 3MB virtual storage above the bar for its stack storage and control blocks.
+SymptomThe Gateway daemon stops responding and the JVM writes a java.lang.OutOfMemory exception to the stderr log file or to the Java™ dump file on thread creation.
+For example 
+
+"java/lang/OutOfMemoryError" "Failed to create a thread: retVal
+-1073741830, errno 132 (0x84), errno2 -1055784930 (0xffffffffc112001e)"
+
+Probable causeTHE MEMLIMIT and REGION size defined would be lesser than the actual amount required.
+
+ActionIncrease the MEMLIMIT and REGION size for CICS transaction gateway as per the configuration.
+
+
+
+
+Parent topic: Memory problems
+
+Related reference:
+List of statistics
+
+Related information:
+Displaying statistics
+Gateway daemon resources
+
+
+
+
+ Information
+
+
+Feedback
+ Last updated: Thursday, 18 March 2019
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/ahpdwde.html
+
+
+
+
+Dealing with problems
+The problems in this section are organized into categories,
+for example installation, configuration, and performance. Each topic
+covers a single problem and provides details of the symptom, probable
+cause, and the action to take.
+
+
+
+Startup and shutdown problems
+Problems when starting and stopping CICS® Transaction Gateway.
+CICS connection problems
+Problems with connections to CICS Transaction
+Server.
+Security problems
+Problems with security.
+Memory problems
+Problems caused by insufficient memory being available.
+Resource problems
+Problems due to shortage of resources.
+Java problems
+Problems related to Java™.
+Application development problems
+Problems with developing applications for CICS Transaction Gateway.
+IBM WebSphere Application Server problems
+Problems with IBM® WebSphere® Application
+Server.
+Version problems
+Problems due to product version non-compatibility.
+JSON web services assistant problems
+Problems with the JSON web services assistant.
+JSON web services problems
+Problems with JSON web services.
+
+
+Parent topic: Resolving problems
+
+
+
+
+ Information
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/diagnosing.html
+
+
+

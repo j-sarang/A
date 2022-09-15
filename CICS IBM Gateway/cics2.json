@@ -1,0 +1,279 @@
+['"https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/edc5111i.html']
+['"https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/aipdzlc.html']
+['"https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/ipic_auto_trouble.html']
+['"https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/probs_connect_exci.html']
+['"https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/probs_connect_ipic.html']
+['"https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/diagnosing.html']
+['javascript:ibm_id_form()']
+
+Port is in use by another task
+A permission denied error occurs if a port
+that CICS® Transaction Gateway attempts
+to use is already in use by another task.
+SymptomThe following error message is displayed:
+EDC5111I
+PERMISSION DENIED
+
+Probable causeThe port that CICS Transaction
+Gateway is attempting to use is already in use.
+
+ActionDo one of the following: Enforce the exclusive use of the port for this CICS Transaction Gateway job. You
+can reserve a port for a given jobname in TCPIP.PROFILE. Reconfigure
+the address space that is already using the required port so that
+it uses a different port, then restart.
+Configure the Gateway daemon to use a different port number.
+
+
+
+
+
+
+Parent topic: CICS connection problems
+
+
+
+
+ Information
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/edc5111i.html
+
+
+
+
+Conflict exists with a default port 
+A conflict exists between a default port used
+by CICS® Transaction Gateway for
+one of its supported protocols and another port that is already in
+use.
+SymptomOne or more protocols fail to start
+successfully and the following message is generated:
+CTG6525E
+Unable to start handler for the protocol:protocol,
+port:port, because:[RC]
+
+
+
+Possible causeA conflict might exist between
+the CICS Transaction Gateway default port and a port that is already
+in use.
+
+ActionChange the port number in the configuration
+file (ctg.ini). For more information, see Configuring a remote mode topology.
+
+
+
+
+Parent topic: CICS connection problems
+
+
+
+
+ Information
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/aipdzlc.html
+
+
+
+
+Attempting connection to CICS on
+wrong TCP/IP port
+If CICS® Transaction
+Gateway attempts to connect to CICS on
+the wrong TCP/IP port an error occurs.
+SymptomThe following error is returned:
+ECI_ERR_NO_CICS
+
+Probable causeThe CICS server is listening on a different TCP/IP
+communications port to the one through which CICS Transaction Gateway is attempting the connection.
+This is because the SERVER section of the CICS Transaction Gateway configuration file
+(ctg.ini) is specifying the wrong port number.
+
+ActionCheck which port the CICS server
+is listening on. To check the port an IPIC TCPIPService is defined
+to listen on in CICS Transaction
+Server: 
+On TSO option 6, issue the command: NETSTAT ALLCON (APPLD *CISS*
+
+On
+USS, issue the command: netstat -a -G *CISS*
+Sample
+output: IY2GTGA2 0005AD5F Listen
+ Local Socket:   1.23.456.789..1120
+ Foreign Socket: 2.34.567.890..43066
+ Application Data:  DFHIIY2GTGA2CISSIPIC    IP50889
+IY2GTGA2 0005DB97 Establsh
+ Local Socket:   1.23.456.789..1120
+ Foreign Socket: 2.34.567.890..43066
+ Application Data:  DFHIIY2GTGA2CISSIPIC    0000000700000007
+This
+example shows that the IPIC TCPIPService is listening on port 50889
+and also that an IPCONN is in use. The generated IPCONN name is 00000007.
+
+Change the port number in the configuration file (ctg.ini). For
+more information, see Port.
+
+
+
+Additional informationThe Application
+Data string in the example contains these values:  DFH
+The CICS Transaction Server
+prefix.
+I
+Inbound.
+IY2GTGA2
+The CICS APPLID.
+CISS
+The listening transaction CISS for inbound IPIC requests.
+IPIC
+The TCPIPService.
+IP50889
+The TCPIPService name.
+0000007
+The generated IPCONN name.
+
+
+
+
+
+
+Parent topic: CICS connection problems
+
+
+
+
+ Information
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/ipic_auto_trouble.html
+
+
+
+
+EXCI connection problems
+Problems when connecting to CICS® over
+EXCI.
+
+
+
+
+EXCI pipe limit exceeded
+A problem with error ECI_ERR_SYSTEM_ERROR can occur if
+the EXCI pipe limit is exceeded during communication between CICS servers. This is due to an MVS™ system pipe limit.
+Pipe limit exceeded for available sessions
+A failure with error CTG6882E can occur if CICS Transaction Gateway tries
+to allocate more pipes than the number of available sessions defined
+in the CICS sessions definition.
+This is due to a CICS Transaction
+Gateway system pipe limit.
+
+
+Parent topic: CICS connection problems
+
+
+
+
+ Information
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/probs_connect_exci.html
+
+
+
+
+IPIC connection problems
+Problems when connecting to CICS® over
+IPIC.
+
+
+
+
+Unable to acquire IPCONN
+A problem can occur if the system cannot acquire an IPCONN.
+IPIC connection to CICS fails
+The client application receives an ECI_ERR_NO_CICS error
+when attempting to send a request to CICS over
+an IPIC connection.
+TCP/IP failure
+Problems with connections to CICS Transaction
+Server.
+
+
+Parent topic: CICS connection problems
+
+
+
+
+ Information
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/probs_connect_ipic.html
+
+
+
+
+Dealing with problems
+The problems in this section are organized into categories,
+for example installation, configuration, and performance. Each topic
+covers a single problem and provides details of the symptom, probable
+cause, and the action to take.
+
+
+
+Startup and shutdown problems
+Problems when starting and stopping CICS® Transaction Gateway.
+CICS connection problems
+Problems with connections to CICS Transaction
+Server.
+Security problems
+Problems with security.
+Memory problems
+Problems caused by insufficient memory being available.
+Resource problems
+Problems due to shortage of resources.
+Java problems
+Problems related to Java™.
+Application development problems
+Problems with developing applications for CICS Transaction Gateway.
+IBM WebSphere Application Server problems
+Problems with IBM® WebSphere® Application
+Server.
+Version problems
+Problems due to product version non-compatibility.
+JSON web services assistant problems
+Problems with the JSON web services assistant.
+JSON web services problems
+Problems with JSON web services.
+
+
+Parent topic: Resolving problems
+
+
+
+
+ Information
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/diagnosing.html
+
+
+

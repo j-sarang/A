@@ -1,0 +1,6 @@
+GROUPNAME,,Rule ID,Level,SID,PCRE2,DESCRIPTION,GROUP
+syslog,cisco_vpn,14200,0,cisco-vpn-concentrator, Grouping of Cisco VPN concentrator rules],,
+,,14201,3,14200, ^IKE/52$, VPN authentication successful., authentication_success
+,,14202,5,14200, ^AUTH/5$|^AUTH/9$|^IKE/167$|^PPP/9$|^SSH/33$|^PSH/23$, VPN authentication failed., authentication_failed
+,,14203,4,14200, ^HTTP/47$|^SSH/16$, VPN Admin authentication successful., authentication_success
+,,14251,10,14202, , Multiple VPN authentication failures., authentication_failures

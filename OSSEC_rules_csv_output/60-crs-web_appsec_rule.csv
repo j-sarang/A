@@ -1,0 +1,5 @@
+GROUPNAME,,Rule ID,Level,SID,PCRE2,DESCRIPTION,GROUP,
+access-control,,25000,7,535, root|reboot|admin|superuser|administrator|supervisor|toor, sensitive login detected],,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,

@@ -1,0 +1,295 @@
+['https://www.ibm.com/docs/en/SSZHJ2_9.2.0/operating/topics/admparm_dumpall.html']
+['https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/zosjavaexceptions.html']
+['https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/java_class_cache.html']
+['https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/ccl99brw.ide0.html']
+['https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/diagnosing.html']
+['javascript:ibm_id_form()']
+
+Dumping diagnostic information
+Dumps contain diagnostic information that can be used when
+investigating system problems. Various options are available when
+obtaining dumps.
+Dump options are available for use with the MVS™ system command /F <JOBNAME>,APPL=DUMP.
+To
+get help on the available dump options, issue the following command: /F <JOB_NAME>,APPL=DUMP,?
+
+If the IBM® JVM is used, a subset of the
+options can be used to provide JVM dumps. The IBM JVM can produce a Java™ heap dump, a Java dump,
+or a Java system dump. These
+are produced by a running JVM, and can be requested during typical
+operation of the CICS® Transaction
+Gateway. The dumps contain diagnostic information that can be used
+when investigating system problems.
+For further information
+on IBM JVM dumps, see the IBM Java Diagnostic
+Guide at IBM Java Diagnostic Guide.
+
+ParametersThere are no short forms of the
+parameter names.
+Option
+Description
+
+
+ALL
+Generates all dumps. This option must be specified
+as the only option and cannot be combined with other dump options.
+
+CTGINFO
+Generates a dump containing information about
+the configuration of CICS Transaction
+Gateway.
+
+HEAP
+Generates a Java heap dump.
+
+JAVA
+Generates a Java dump.
+
+JVM
+Generates a dump containing current JVM memory
+usage.
+
+JVMSTACK
+Generates a dump containing only the Java call stack.
+
+SYSTEM
+Generates a Java system dump.
+
+
+
+
+
+
+
+
+
+Parent topic: Administration options
+
+
+
+
+ Reference
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//operating/topics/admparm_dumpall.html
+
+
+
+
+Failure to handle a Java exception
+If an application or CICS® Transaction Gateway fails
+to handle a Java™ exception,
+the Java Virtual Machine (JVM)
+writes a Java stack dump. This
+applies to Java exceptions in
+general.
+SymptomThe JVM has written a Java stack dump.
+
+Probable causeAn application or CICS Transaction Gateway failed
+to handle an exception.
+
+ActionThe destination for the dump output
+depends on your JVM implementation; check your Java documentation for more information.
+
+To increase the information written to the Java stack dump, disable the Just-In-Time (JIT)
+compiler. The information included in the dump might include the line
+of Java source code where the
+exception happened. How you disable the JIT compiler depends on your
+JVM implementation; check your Java documentation
+for more information.
+The following example shows a Java stack
+dump that was created with the JIT compiler disabled:
+Exception in thread "main" java.lang.OutOfMemoryError
+        at java.lang.Thread.start(Native Method)
+        at com.ibm.ctg.server.ThreadManager.createObject
+           (ThreadManager.java:345)
+        at com.ibm.ctg.server.ThreadManager.<init>(ThreadManager.java:131)
+        at com.ibm.ctg.server.ManagedResources.<init>
+           (ManagedResources.java:106)
+        at  com.ibm.ctg.server.JGate.main(JGate.java:895)
+If the CICS Transaction Gateway handles
+an exception, a Java stack dump
+is written only if tracing is enabled. Try to reproduce the problem
+with tracing enabled because it helps to show you what was happening
+before the exception occurred. For more information, see Tracing.
+
+
+
+Parent topic: Java problems
+
+
+
+
+ Information
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/zosjavaexceptions.html
+
+
+
+
+Java class cache problems
+Gateway daemon reports Java™ errors
+during initialization and, when -Xshareclasses option nonfatal is
+not specified, fails to start.  
+SymptomSome, or all, of the following messages
+are written to the CICS® TG
+job log: JVMSHRC022E Error creating shared memory region 
+JVMSHRC336E Port layer error code = -302 or -308 
+JVMSHRC337E Platform error message: EDC5111I Permission denied. 
+JVMSHRC028E Permission Denied 
+
+ICH408I USER(userid ) GROUP(group-name ) NAME(user-name)
+/tmp/javasharedresources/C240D2A32_semaphore_cicstgvrmgroup-name_Gnn
+CL(FSOBJ ) FID(0000000000000000000000D200000000)
+INSUFFICIENT AUTHORITY TO OPEN
+ACCESS INTENT(RW-) ACCESS ALLOWED(GROUP R--)
+EFFECTIVE UID(uid) EFFECTIVE GID(gid)
+
+ICH408I USER(userid ) GROUP(group-name ) NAME(user-name)
+/tmp/javasharedresources/C240D2A32_memory_cicstgvrmgroup-name_Gnn
+CL(FSOBJ ) FID(0000000000000000000000D300000000)
+INSUFFICIENT AUTHORITY TO OPEN
+ACCESS INTENT(RW-) ACCESS ALLOWED(GROUP R--)
+EFFECTIVE UID(uid) EFFECTIVE GID(gid)
+
+
+Probable causeCICS Transaction Gateway uses Java class caching and the user ID starting
+the Gateway daemon should have the relevant permissions to allow the
+user ID to create, or use existing, Java shared
+resources in the /tmp/javasharedresources directory. If the user ID
+starting the Gateway daemon does not have the relevant permissions
+some, or all, of the messages above are written to the CICS TG job log. CICS Transaction Gateway specifies
+the -Xshareclasses option nonfatal, which ensures
+that failure to access the Java shared
+class cache resources does not prevent the Gateway daemon from starting.
+If the -Xshareclasses option nonfatal is removed,
+the Gateway daemon will fail to initialize if it cannot access the Java shared class cache resources. 
+This
+might occur if the Gateway daemon is started by different user IDs
+that do not have the correct permissions to access the shared class
+cache resources in the /tmp/javasharedresources directory.  
+
+ActionEnsure that all user IDs starting
+a Gateway daemon have the correct permissions to access the tmp/javasharedresources
+directory and the Java shared
+class cache resources. See Configuring Java shared classes for details
+of how to configure CICS TG
+with Java class caching.  
+For
+more information see your Java documentation.
+
+
+
+
+Parent topic: Java problems
+
+
+
+
+ Information
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/java_class_cache.html
+
+
+
+
+Unable to load class that supports TCP/IP
+If Java attempts to use class files from the local file
+system, this contravenes security rules and generates an exception.
+SymptomThe following error occurs when
+running applications:  
+java.io.IOException: CTG6664E
+Protocol tcp not supported 
+
+Probable causeYou are using a Web browser
+and CICS® Transaction Gateway on
+the same workstation, and the ctgclient.jar and ctgserver.jar are
+referenced in the CLASSPATH setting.
+Java searches the CLASSPATH
+environment variable before downloading classes across the network.
+If the required class is local, Java attempts to use it. However,
+use of class files from the local file system contravenes the application
+security rules, and generates an exception.
+
+ActionEdit the CLASSPATH setting to remove
+ctgclient.jar and ctgserver.jar.
+
+
+
+
+Parent topic: Java problems
+
+
+
+
+ Information
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/ccl99brw.html
+
+
+
+
+Dealing with problems
+The problems in this section are organized into categories,
+for example installation, configuration, and performance. Each topic
+covers a single problem and provides details of the symptom, probable
+cause, and the action to take.
+
+
+
+Startup and shutdown problems
+Problems when starting and stopping CICS® Transaction Gateway.
+CICS connection problems
+Problems with connections to CICS Transaction
+Server.
+Security problems
+Problems with security.
+Memory problems
+Problems caused by insufficient memory being available.
+Resource problems
+Problems due to shortage of resources.
+Java problems
+Problems related to Java™.
+Application development problems
+Problems with developing applications for CICS Transaction Gateway.
+IBM WebSphere Application Server problems
+Problems with IBM® WebSphere® Application
+Server.
+Version problems
+Problems due to product version non-compatibility.
+JSON web services assistant problems
+Problems with the JSON web services assistant.
+JSON web services problems
+Problems with JSON web services.
+
+
+Parent topic: Resolving problems
+
+
+
+
+ Information
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/diagnosing.html
+
+
+

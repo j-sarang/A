@@ -1,0 +1,9 @@
+GROUPNAME,,Rule ID,Level,SID,PCRE2,DESCRIPTION,GROUP,
+syslog,vpopmail,9900,0,vpopmail, Grouping for the vpopmail rules.],,,
+,,9901,5,9900,  password fail , authentication_failed,, Login failed for vpopmail.]
+,,9902,5,9900,  vpopmail user not found , invalid_login,, Attempt to login to vpopmail with invalid username.]
+,,9903,5,9900,  null password given , authentication_failed,, Attempt to login to vpopmail with empty password.]
+,,9904,1,9900,  login success , authentication_success,, Vpopmail successful login.]
+,,9951,10,9901, , Vpopmail brute force (multiple failed logins)., authentication_failures,
+,,9952,10,9902, , Vpopmail brute force (email harvesting)., authentication_failures,
+,,9953,10,9903, , VPOPMAIL brute force (empty password)., authentication_failures,

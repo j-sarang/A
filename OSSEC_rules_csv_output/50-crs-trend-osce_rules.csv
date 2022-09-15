@@ -1,0 +1,6 @@
+GROUPNAME,,Rule ID,Level,SID,PCRE2,DESCRIPTION,GROUP
+trend_micro,ocse,7600,0,trend-osce, Grouping of Trend OSCE rules.],,
+,,7610,5,7600, ^0|$|^1$|^2$|^33|^10$|^11$|^12$, virus</group>, Virus detected and cleaned/quarantined/removed]
+,,7611,9,7600, ^5$|^6$|^7$|^8$|^14$|^15$|^16$, virus</group>, Virus detected and unable to clean up.]
+,,7612,3,7600, ^4$|^13$, Virus scan completed with no errors detected.],
+,,7613,5,7600, ^25$, Virus scan passed by found potential security risk.],

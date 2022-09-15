@@ -1,0 +1,9 @@
+GROUPNAME,,Rule ID,Level,SID,PCRE2,DESCRIPTION,GROUP
+syslog,wordpress,9500,0,wordpress, Wordpress messages grouped.],,
+,,9501,5,9500, User authentication failed, Wordpress authentication failed., authentication_failed
+,,9502,3,9500, User logged in, Wordpress authentication succeeded., authentication_success
+,,9503,3,9500, WPsyslog was successfully initiali, WPsyslog was successfully initialized.],
+,,9504,3,9500, Plugin deactivated, Wordpress plugin deactivated.],
+,,9505,7,9500, Warning: Comment flood attempt, Wordpress Comment Flood Attempt.],
+,,9510,7,9500, Warning: IDS:, Attack against Wordpress detected.],
+,,9551,10,9501, , Multiple wordpress authentication failures., authentication_failures

@@ -1,0 +1,10 @@
+GROUPNAME,,Rule ID,Level,SID,PCRE2,DESCRIPTION,GROUP,,,
+syslog,owncloud,53300,0,owncloud, ownCloud messages grouped.],,,,,
+,,53301,6,53300, Login failed: , ownCloud authentication failed., authentication_failed,,,
+,,53302,10,53301, , ownCloud brute force (multiple failed logins)., authentication_failures,,,
+,,53303,6,53300, Passed filename is not valid, might be malicious , ownCloud possible malicious request., web,appsec,attack
+,,53304,8,53300, ^4$, ownCloud FATAL message.],,,,
+,,53305,4,53300, ^3$, ownCloud ERROR message.],,,,
+,,53306,3,53300, ^2$, ownCloud WARN message.],,,,
+,,53307,0,53300, ^1$, ownCloud INFO message.],,,,
+,,53308,0,53300, ^0$, ownCloud DEBUG message.],,,,

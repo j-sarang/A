@@ -1,0 +1,4 @@
+GROUPNAME,,Rule ID,Level,SID,PCRE2,DESCRIPTION,GROUP,
+syslog,vm-pop3d,9800,0,vm-pop3d, Grouping for the vm-pop3d rules.],,,
+,,9801,5,9800, failed auth, authentication_failed, Login failed accessing the pop3 server.],
+,,9820,10,9801, , POP3 brute force (multiple failed logins)., authentication_failures,

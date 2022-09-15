@@ -1,0 +1,19 @@
+GROUPNAME,,Rule ID,Level,SID,PCRE2,DESCRIPTION,GROUP,
+windows, ipsec,18651,8,18104, ^4646$, IKE DoS-prevention mode started, windows,
+,,18652,8,18105, ^4652$|^4653$, An IPsec Main Mode negotiation failed, windows,
+,,18653,8,18105, ^4654$, An IPsec Quick Mode negotiation failed, windows,
+,,18654,8,18104, ^4983$|^4984$, An IPsec Extended Mode negotiation failed, windows,
+,,18655,4,18104, ^4960$, IPsec dropped an inbound packet that failed an integrity check, windows,
+,,18656,8,18104, ^4961$|^4962$, IPsec dropped an inbound packet that failed a replay check, windows,
+,,18657,8,18104, ^4963$, IPsec dropped an inbound clear text packet that should have been secured, windows,
+,,18658,4,18104, ^4965$, IPsec received a packet from a remote computer with an incorrect Security Parameter Index (SPI), windows,
+,,18659,7,18104, ^4976$, During Main Mode negotiation, IPsec received an invalid negotiation packet, windows
+,,18660,7,18104, ^4977$, During Quick Mode negotiation, IPsec received an invalid negotiation packet, windows
+,,18661,7,18104, ^4978$, During Extended Mode negotiation, IPsec received an invalid negotiation packet, windows
+,,18662,8,18104, ^5453$, An IPsec negotiation with a remote computer failed because the IKE and AuthIP IPsec Keying Modules (IKEEXT) service is not started, windows,
+,,18663,8,18105, ^5480$, IPsec Services failed to get the complete list of network interfaces on the computer, windows,
+,,18664,8,18105, ^5483$, IPsec Services failed to initialize RPC server. IPsec Services could not be started, windows,
+,,18665,8,18105, ^5484$, IPsec Services has experienced a critical failure and has been shut down, windows,
+,,18666,8,18105, ^5485$, IPsec Services failed to process some IPsec filters on a plug-and-play event for network interfaces, windows,
+,,18667,8,18104, ^4710$, IPsec Services was disabled, windows,
+,,18668,8,18105, ^4712$, IPsec Services encountered a potentially serious failure, windows,

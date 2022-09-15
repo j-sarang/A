@@ -1,0 +1,38 @@
+
+Version compatibility problem with CTGRRMS
+If CICS® Transaction
+Gateway and the active CTGRRMS PC services have different versions, CICS Transaction Gateway terminates
+with a CTG9215E error.
+SymptomCICS Transaction
+Gateway terminates and the following error message is issued:
+CTG9215E
+CICS TG version different from the active CTGRRMS PC services 
+
+Probable causeThe version of the CICS Transaction Gateway that
+ you are using is not the same as the version of the CTGRRMS service
+address space that is running on the IBM® z/OS® image.
+The executable code for CTGRRMS is supplied in CTGINIT which is shipped
+with CICS Transaction Gateway.
+If the version of CTGINIT is incremented at a new release of CICS Transaction Gateway, you must
+refresh CTGRRMS to start using the new version.
+ActionEnsure that the versions of the CICS Transaction Gateway and
+the CTGRRMS services are the same. See Refreshing CTGRRMS services for information
+on how to do this.
+
+
+
+Parent topic: Version problems
+
+
+
+
+ Reference
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/C0300003.html
+
+
+

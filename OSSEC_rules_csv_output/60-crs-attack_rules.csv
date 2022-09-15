@@ -1,0 +1,14 @@
+GROUPNAME,,Rule ID,Level,SID,PCRE2,DESCRIPTION,GROUP,
+syslog,attacks,40101,12,authentication_success,$SYS_USERS, System user successfully logged to the system., invalid_login,
+,,40102,14, [^rpc\.statd\[\d+\]: gethostbyname error for [^A-Za-z0-9@_-]+, Buffer overflow attack on rpc.statd, exploit_attempt,,
+,,40103,14, [ftpd\[\d+\]: \S+ FTP LOGIN FROM .+ 0bin0sh, Buffer overflow on WU-FTPD versions prior to 2.6, exploit_attempt,,
+,,40104,13, [\?{21}, Possible buffer overflow attempt., exploit_attempt,,
+,,40105,12, [changed by \(\(null\)," ""Null"" user changed some information.", exploit_attempt,,
+,,40106,12, [@{25}, Buffer overflow attempt (probably on yppasswd)., exploit_attempt,,
+,,40107,14, [cachefsd: Segmentation Fault - core dumped, Heap overflow in the Solaris cachefsd service.," <info type=""cve"">2002-0033</info>", exploit_attempt,
+,,40109,12, [attempt to execute code on stack by, Stack overflow attempt or program exiting , with SEGV (Solaris).," <info type=""link"">http://snap.nlc.dcccd.edu/reference/sysadmin/julian/ch18/389-392.html</info>", exploit_attempt
+,,40111,10, authentication_failed, Multiple authentication failures., authentication_failures,,
+,,40112,12,authentication_success,authentication_failures, , Multiple authentication failures followed , by a success.]
+,,40113,12, virus, Multiple viruses detected - Possible outbreak., virus,,
+syslog,elevation_of_privilege,40501,15,adduser,attacks, Attacks followed by the addition , of an user.],
+syslog,recon,40601,10, connection_attempt, Network scan from same source ip., ,,

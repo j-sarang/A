@@ -1,0 +1,21 @@
+GROUPNAME,,Rule ID,Level,SID,PCRE2,DESCRIPTION,GROUP,
+vmware,,19100,0,vmware, VMWare messages grouped.],,,
+,,19101,0,vmware-syslog, VMWare ESX syslog messages grouped.],,,
+,,19102,8,19100, ^crit|^fatal, VMware ESX critical message.],,
+,,19103,4,19100, ^error, VMware ESX error message.],,
+,,19104,3,19100, ^warn, VMware ESX warning message.],,
+,,19105,0,19100, ^notice, VMware ESX notice message.],,
+,,19106,0,19100, ^info, VMware ESX informational message.],,
+,,19107,0,19100, ^verbose, VMware ESX verbose message.],,
+,,19110,3,19106, logged in$, VMWare ESX authentication success., authentication_success,
+,,19111,5,19106, Failed login attempt for, VMWare ESX authentication failure., authentication_failed,
+,,19112,3,19101, vmware-hostd|vmware-authd, Accepted password for|login from, VMWare ESX user login., authentication_success
+,,19113,3,19101, vmware-hostd|vmware-authd, Rejected password for, VMWare ESX user authentication failure., authentication_failed
+,,19120,8,19106, -&gt; VM_STATE_OFF, Virtual machine state changed to OFF., service_availability,
+,,19121,3,19106, -&gt; VM_STATE_POWERING_ON, Virtual machine being turned ON.],,
+,,19122,3,19106, -&gt; VM_STATE_ON, Virtual machine state changed to ON., alert_by_email],
+,,19123,5,19106, -&gt; VM_STATE_RECONFIGURING, Virtual machine being reconfigured., config_changed, alert_by_email]
+,,19150,10,19104, Multiple VMWare ESX warning messages., service_availability,,
+,,19151,10,19103, Multiple VMWare ESX error messages., service_availability,,
+,,19152,10,19111, Multiple VMWare ESX authentication failures., authentication_failures,,
+,,19153,10,19113, Multiple VMWare ESX user authentication failures., authentication_failures,,

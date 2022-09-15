@@ -1,0 +1,8 @@
+GROUPNAME,,Rule ID,Level,SID,PCRE2,DESCRIPTION,GROUP,
+syslog,vsftpd,11400,0,vsftpd, Grouping for the vsftpd rules.],,,
+,,11401,3,11400, CONNECT: Client, connection_attempt</group>, FTP session opened.],
+,,11402,3,11400, OK LOGIN: , FTP Authentication success., authentication_success,
+,,11403,5,11400, FAIL LOGIN: , Login failed accessing the FTP server., authentication_failed,
+,,11404,0,11400, OK UPLOAD: , FTP server file upload.],,
+,,11451,10,11403, , FTP brute force (multiple failed logins)., authentication_failures,
+,,11452,10,11401, , Multiple FTP connection attempts from , same source IP., recon

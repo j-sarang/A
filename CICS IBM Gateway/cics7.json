@@ -1,0 +1,99 @@
+['https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/codepageproblems.html']
+['https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/unresolved_external_symbol.html']
+['https://www.ibm.com/docs/en/SSZHJ2_9.2.0/troubleshooting/topics/diagnosing.html']
+['javascript:ibm_id_form()']
+
+Corrupted data when using channels and containers
+Data corruption when using channels and containers can
+occur if an incorrect CCSID is specified.
+SymptomUnexpected or corrupt
+data is returned to the client application when using an IPIC connection
+and channels and containers.
+
+Probable causeThe wrong CCSID is specified on the client application channel
+and has been inherited by the container.
+The wrong CCSID is specified on the container.
+
+
+
+ActionIf corrupted or unexpected data is returned, run a Gateway daemon
+trace to find out which code page the JVM is running on. Look in the
+System Properties section at the top of the trace.
+For Java™ applications,
+use the setCCSID method to set the required code page on the channel.
+You must explicitly specify a CCSID when creating the container. For
+C or NET Framework or .NET Core based applications, specify a CCSID when creating
+a CHAR container.
+
+
+For more information on how to find the code page that
+the Client has sent to the server, see Data conversion.
+
+
+
+
+Parent topic: Application development problems
+
+
+
+
+ Information
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/codepageproblems.html
+
+
+
+
+Windows build script gives error unresolved external symbol
+Problem using a Visual Studio command prompt to compile
+the ECI and ESI V2 samples with the .cmd build
+script.
+SymptomThe link command fails with the
+following messages:
+> link /LIBPATH:"C:\Program Files (x86)\IBM\CICS Transaction Gateway\lib64" 
+/DEBUG "C:\ProgramData\IBM\CICS Transaction Gateway\samples\c\esi_v2\ctgesib1.obj" 
+ctgclient.lib /OUT:"C:\ProgramData\IBM\CICS Transaction Gateway\samples\c\esi_v2\ctgesib1.exe"
+Microsoft (R) Incremental Linker Version 12.00.30501.0
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+ctgesib1.obj : error LNK2019: unresolved external symbol _CTG_openRemoteGatewayConnection referenced in function _openGatewayConnection
+ctgesib1.obj : error LNK2019: unresolved external symbol _CTG_closeGatewayConnection referenced in function _closeGatewayConnection
+ctgesib1.obj : error LNK2019: unresolved external symbol _CTG_getRcString referenced in function _displayRc
+ctgesib1.obj : error LNK2019: unresolved external symbol _CTG_listSystems referenced in function _selectServer
+ctgesib1.obj : error LNK2019: unresolved external symbol _CTG_ESI_verifyPassword referenced in function _verifyUser
+ctgesib1.obj : error LNK2019: unresolved external symbol _CTG_ESI_convertTime referenced in function _verifyUser
+
+C:\ProgramData\IBM\CICS Transaction Gateway\samples\c\esi_v2\ctgesib1.exe : fatal error LNK1120: 6 unresolved externals
+
+
+Probable causeThe wrong Visual Studio environment
+is being used. This can happen when the build script requests a 64-bit
+compilation but was run from a 32-bit Visual Studio command prompt
+or a 32-bit compilation was requested from a 64-bit Visual Studio
+command prompt.
+
+ActionOpen a new Visual Studio command
+prompt with the correct build environment and run the build script. 
+
+
+
+
+Parent topic: Application development problems
+
+
+
+
+ Information
+
+
+Feedback
+ Last updated: Thursday, 2 March 2017
+
+https://ut-ilnx-r4.hursley.ibm.com/tgzos_latest/help/topic/com.ibm.cics.tg.zos.doc//troubleshooting/topics/unresolved_external_symbol.html
+
+
+

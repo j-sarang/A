@@ -1,0 +1,2 @@
+GROUPNAME,,Rule ID,Level,SID,PCRE2,DESCRIPTION,GROUP,
+web-access,,31111,2,31100,\.top:|\.to:|\.gq:|\.cf:|\.men:|\.loan:|\.ml:|\.work:|\.click:|\.tk:|\.country:|\.pw:|\.party:|\.trade:|\.review:|\.club:|\.bid:|\.country:|\.stream:|\.download:|\.xin:|\.gdn:|\.racing:|\.jetzt:|\.win:|\.vip:|\.ren:|\.kim:|\.mom:|\.date:|\.wang:|\.accountants:|\.science:|\.work:|\.ninja:|\.xyz:|\.faith:|\.zip:|\.racing:|\.cricket:|\.space:|\.realtor:|\.christmas:|\.gdn:|\.pro:, Maybe critical URL access attempt],,
